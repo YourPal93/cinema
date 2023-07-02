@@ -1,15 +1,20 @@
 package cinema;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Viewer {
     private String nickName;
     private int age;
     private int watchedMovies;
 
+    private List<Cinema> watchedMoviesList;
 
-    public Viewer(String nickName, int age, int watchedMovies) {
+
+    public Viewer(String nickName, int age) {
         this.nickName = nickName == null || nickName.isBlank() ? "default_name" : nickName;
         this.age = Math.max(0, age);
-        this.watchedMovies = Math.max(0, watchedMovies);
+        this.watchedMoviesList = new ArrayList<>();
     }
 
 
@@ -33,7 +38,15 @@ public class Viewer {
         return watchedMovies;
     }
 
-    public void setWatchedMovies(int watchedMovies) {
-        this.watchedMovies = Math.max(0, watchedMovies);
+    public void setWatchedMoviesList(List<Cinema> watchedMoviesList) {
+        this.watchedMoviesList = watchedMoviesList == null ? new ArrayList<>() : watchedMoviesList;
+        this.watchedMovies = watchedMoviesList.size();
+    }
+
+    public void addWatchedMovie(Cinema movie) {
+        if(movie != null) {
+            this.watchedMoviesList.add(movie);
+            this.watchedMovies++;
+        }
     }
 }
